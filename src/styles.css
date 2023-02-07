@@ -37,11 +37,11 @@ body{
 }
 
 .btn:focus{
-    outline: none;
+    outline: 1px rgb(9, 255, 0) solid;
 }
 
 .btn:active{
-    transform: scale(.98);
+    transform: scale(.95);
 }
 
 .btn-block{
@@ -49,9 +49,7 @@ body{
     width: 100%;
 }
 
-.add-form{
-    margin-bottom: 40px;
-}
+
 
 .form-control label{
     display: block;
@@ -68,7 +66,7 @@ body{
 .form-control-check{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .form-control-check label{

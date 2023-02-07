@@ -10,6 +10,7 @@ import { TaskService } from 'src/app/Services/task.service';
 })
 export class TasksComponent implements OnInit 
 {
+
   //line below: Tasks is a public array in Mock-Tasks.ts; 
   //no longer needed when retrieving data from json server
   // tasks:Task[] = Tasks;
@@ -31,8 +32,29 @@ export class TasksComponent implements OnInit
     this.taskService.DeleteTask(task).subscribe((result:Task)=>
     {
       // this.tasks = result;
-      console.log(`Tasks array: ${result}`);
+      //leaving blank for now
+      //may need to update task list to account for deleted task
+      this.tasks = this.tasks.filter(t => t.id !== task.id)
+      console.log(`Task Deleted: ${result}`);
+
     });
   }
-  
+
+  ToggleReminder(task: Task) 
+  {
+    task.reminder = !task.reminder;
+    this.taskService.UpdateTaskReminder(task).subscribe((result:Task)=>
+    {
+      console.log(result.reminder);
+    })
+  }
+
+  AddTask(task: Task):void{
+    this.taskService.AddTask(task).subscribe((result:Task)=>
+    {
+      this.tasks.push(task);
+      console.log(`Task Added: ${result}`);
+    });
+  }
+
 }

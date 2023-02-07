@@ -23,7 +23,16 @@ export class TaskService {
     return this.http.get<Task[]>(this.url+"/tasks");
   }
 
+  AddTask(task:Task):Observable<Task>{
+    return this.http.post<Task>(`${this.url}/tasks`, task);
+  }
+
   DeleteTask(task:Task):Observable<Task>{
-    return this.http.delete<Task>(`${this.url}/${task.id}`);
+    console.log("emitted from service");
+    return this.http.delete<Task>(`${this.url}/tasks/${task.id}`);
+  }
+
+  UpdateTaskReminder(task:Task):Observable<Task>{
+    return this.http.put<Task>(`${this.url}/tasks/${task.id}`, task);
   }
 }
