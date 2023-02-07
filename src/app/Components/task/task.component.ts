@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from 'src/app/task';
 import { faTimes, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
@@ -10,6 +10,7 @@ import { faTimes, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 export class TaskComponent implements OnInit
 {
   @Input() task:Task = {} as Task;
+  @Output() onDeleteTask:EventEmitter<Task> = new EventEmitter();
   xMark:IconDefinition = faTimes;
 
   constructor(){}
@@ -19,4 +20,7 @@ export class TaskComponent implements OnInit
 
   }
 
+  DeleteTask(task:Task){
+    this.onDeleteTask.emit(task);
+  }
 }
