@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UIService } from 'src/app/Services/ui.service';
+import { Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -10,13 +12,23 @@ export class HeaderComponent implements OnInit {
   
   title:string = "Task Tracker";
 
-  constructor() {}
+  showAddTask: boolean = true;
+  subscription:Subscription = new Subscription();
+
+  constructor(private uiService:UIService) 
+  {
+    this.subscription = this.uiService.onToggle().subscribe((result: boolean)=>
+    {
+      this.showAddTask = result;
+    })
+  }
   
   ngOnInit(): void {
     
   }
   
-  ToggleAddTask() {
-    console.log("BOOM BIYATCH");
-    }
+  ToggleAddTask() 
+  {
+    this.uiService.ToggleAddTask();
+  }
 }
